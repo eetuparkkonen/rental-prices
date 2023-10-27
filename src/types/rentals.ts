@@ -23,7 +23,7 @@ export interface Root {
     id: string[]
     size: number[]
     dimension: Dimension
-    value: number[]
+    value: number[] | null[]
     role: Role
     version: string
     extension: Extension8
@@ -57,7 +57,7 @@ export interface Root {
   }
   
   export interface Label {
-    "2023Q2": string
+    [key: string]: string
   }
   
   export interface Link {
@@ -129,7 +129,7 @@ export interface Root {
   }
   
   export interface Label3 {
-    "02": string
+    [key: string]: string
   }
   
   export interface Link3 {
@@ -190,4 +190,11 @@ export interface Root {
   export interface Px {
     tableid: string
     decimals: number
+  }
+
+  export interface InputTypes {
+    quarter: string
+    postal: string
+    rooms: string
+    squareMeters: number
   }
