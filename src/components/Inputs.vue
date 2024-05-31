@@ -4,10 +4,23 @@
             Valitse suodattimet vuokra-asunnolle
         </v-card-title>
 
+        <v-select
+            v-model="chartType"
+            class="w-50 ma-auto mt-6"
+            color="black"
+            base-color="black"
+            item-color="black"
+            bg-color="white"
+            label="Tyyppi"
+            :items="chartTypeItems"
+            flat
+        >
+        </v-select>
+
         <v-form>
             <v-row class="my-6 d-flex justify-center">
                 <v-col md="5">
-                    <v-select v-model="data.quarter" color="black" base-color="black" item-color="black" bg-color="white"
+                    <v-select v-if="chartType === 'table'" v-model="data.quarter" color="black" base-color="black" item-color="black" bg-color="white"
                         label="Vuosineljännes" :items="quarterItems" flat>
                         <!-- @vue-ignore -->
                         <template v-slot:counter></template>
@@ -34,7 +47,7 @@
                 </v-col>
             </v-row>
 
-            <v-btn class="mb-8" @click="$emit('getData', data)">
+            <v-btn class="mb-8" @click="$emit('getData', data, chartType)">
                 Hae
             </v-btn>
         </v-form>
@@ -46,7 +59,16 @@
 
 
 <script lang="ts" setup>
-import { computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
+
+const chartType = ref('line')
+
+const chartTypeItems = [
+    { title: 'Viiva', value: 'line' },
+    { title: 'Taulukko', value: 'table' },
+]
+
+
 
 const data = reactive({
     quarter: '',
