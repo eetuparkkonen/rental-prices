@@ -1,89 +1,79 @@
 <template>
-  <v-card elevation="0" color="tertiary" class="w-100 h-100 text-center rounded-xl">
+  <v-card elevation="0" color="#f9f9f9" class="w-100 h-100 text-center rounded-xl">
     <v-card-title class="mt-6"> Valitse suodattimet vuokra-asunnolle </v-card-title>
 
     <v-form>
       <div v-if="chartType === 'Taulukko'">
         <v-row class="my-6 d-flex justify-center">
+          <!-- Postal Code Field -->
           <v-col md="5">
             <v-text-field
               v-model="data.postal"
-              dirty
-              color="white"
               clearable
               label="Postinumero"
-              base-color="black"
-              item-color="black"
-              bg-color="white"
               flat
+              class="custom-input"
+              hide-details="auto"
             ></v-text-field>
           </v-col>
 
+          <!-- Quarter Select -->
           <v-col md="5">
             <v-select
               v-model="data.quarter"
               :items="quarterItems"
-              dirty
-              color="white"
               clearable
               label="Vuosineljännes"
-              base-color="black"
-              item-color="black"
-              bg-color="white"
               flat
-            >
-            </v-select>
+              class="custom-select"
+              hide-details="auto"
+            ></v-select>
           </v-col>
         </v-row>
+
         <v-row class="my-6 d-flex justify-center">
+          <!-- Rooms Select -->
           <v-col md="5">
             <v-select
               v-model="data.rooms"
-              color="black"
               clearable
               label="Huoneiden määrä"
               :items="rooms"
-              base-color="black"
-              item-color="black"
-              bg-color="white"
               flat
-            >
-              <!-- @vue-ignore -->
-              <template v-slot:counter></template>
-              <!-- v-select has a bug which shows counter value, this is a workaround -->
-            </v-select>
+              class="custom-select"
+              hide-details="auto"
+            ></v-select>
           </v-col>
+
+          <!-- Square Meters Field -->
           <v-col md="5">
             <v-text-field
               v-model.number="data.squareMeters"
-              color="black"
               clearable
               label="Neliömetrit"
-              base-color="black"
-              item-color="black"
-              bg-color="white"
               type="number"
+              class="custom-input"
+              hide-details="auto"
             ></v-text-field>
           </v-col>
         </v-row>
       </div>
+
       <div v-else>
+        <!-- Example of another section of input -->
         <v-col md="12">
           <v-text-field
             v-model="data.postal"
             dirty
-            color="white"
             clearable
             label="Postinumero"
-            base-color="black"
-            item-color="black"
-            bg-color="white"
-            flat
+            class="custom-input"
+            hide-details="auto"
           ></v-text-field>
         </v-col>
       </div>
 
-      <v-btn color="primary" class="mb-8" @click="$emit('getData', data)"> Hae </v-btn>
+      <v-btn color="secondary" class="mb-8" @click="$emit('getData', data)"> Hae </v-btn>
     </v-form>
   </v-card>
 </template>
@@ -113,4 +103,82 @@ const rooms = [
 ];
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" >
+$primary-color: #03a9f4;
+$secondary-color: #4caf50;
+$border-color: #e0e0e0;
+$text-color: #333;
+$label-color: #666;
+$hover-color: #0288d1;
+$input-background: #ffffff; /* Light background for input fields */
+$input-border-radius: 12px;
+$input-padding: 12px;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+
+.custom-input,
+.custom-select {
+  .v-input__control {
+    background-color: $input-background; /* Lighter background */
+    border-radius: $input-border-radius;
+    padding: $input-padding;
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+
+    &:focus-within {
+      border-color: $primary-color;
+      box-shadow: 0 0 10px rgba(3, 169, 244, 0.3); /* Subtle glow effect on focus */
+    }
+  }
+
+  .v-field__overlay {
+    background: $input-background !important;
+  }
+
+  .v-label {
+    font-weight: bold;
+    color: $label-color;
+  }
+
+  input {
+    color: $text-color;
+    background-color: transparent;
+    &:focus {
+      background-color: white;
+    }
+  }
+
+  .v-input__append-inner .v-icon {
+    color: $secondary-color;
+  }
+
+  .v-text-field__details {
+    display: none;
+  }
+}
+
+.v-btn {
+  background-color: $primary-color;
+  color: white;
+  border-radius: 20px;
+  box-shadow: none;
+  padding: 10px 20px;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+.container {
+  background-color: #f1f7fc; /* Light background container */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: $box-shadow;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: $text-color;
+  margin-bottom: 30px;
+}
+</style>

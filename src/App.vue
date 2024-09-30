@@ -5,11 +5,9 @@
         <v-select
           v-model="chartType"
           label="Kuvaajatyyppi"
-          base-color="primary"
-          item-color="primary"
-          bg-color="tertiary"
-          color="primary"
           :items="['Viiva', 'Taulukko']"
+          class="custom-select"
+          hide-details="auto"
         />
         <Inputs @getData="onGetPrices" :chartType="chartType" />
       </v-container>
@@ -79,5 +77,69 @@ onMounted(() => {
 .app-container-card {
   min-height: 80%;
   min-width: 80%;
+}
+
+$primary-color: #03a9f4; // Button primary color
+$secondary-color: #4caf50; // Secondary color
+$border-color: #dcdcdc; // Light gray border color
+$text-color: #333; // Dark text color
+$label-color: #555; // Slightly darker label color
+$hover-color: #0288d1; // Button hover color
+$input-background: #ffffff; // Bright white background for input fields
+$input-border-radius: 12px; // Rounded corners
+$input-padding: 12px; // Padding for inputs
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Light shadow for depth
+
+.custom-select {
+  .v-input__control {
+    background-color: $input-background; // White background
+    border-radius: $input-border-radius;
+    border: 1px solid $border-color; // Light gray border
+    box-shadow: $box-shadow; // Light shadow
+
+    &:focus-within {
+      border-color: $primary-color; // Blue border on focus
+      box-shadow: 0 0 10px rgba(3, 169, 244, 0.3); // Subtle glow effect on focus
+    }
+  }
+
+  .v-label {
+    font-weight: bold;
+    color: $label-color; // Slightly darker for better visibility
+  }
+
+  .v-select__selection {
+    color: $text-color; // Dark text for readability
+    background-color: transparent; // Keep background transparent
+  }
+
+  .v-input__append-inner .v-icon {
+    color: $secondary-color; // Icon color
+  }
+
+  .v-select__slot {
+    border-radius: $input-border-radius; // Rounded corners for the dropdown
+    background-color: $input-background; // White background
+    border: 1px solid $border-color; // Light gray border
+    box-shadow: $box-shadow; // Light shadow
+
+    &:focus {
+      border-color: $primary-color; // Blue border on focus
+    }
+  }
+
+  .v-select__menu {
+    background-color: white; // Dropdown background
+    box-shadow: $box-shadow; // Shadow for dropdown
+    border-radius: $input-border-radius; // Rounded corners for dropdown
+  }
+
+  .v-list-item {
+    color: $text-color; // Text color for dropdown items
+
+    &:hover {
+      background-color: rgba(3, 169, 244, 0.1); // Light blue on hover
+    }
+  }
 }
 </style>
