@@ -4,6 +4,10 @@
     font-family: roboto;
 }
 
+.v-application {
+    background-color: rgb(var(--v-theme-primary)) !important;
+}
+
 @font-face {
     font-family: 'roboto';
     src: url('~@/assets/fonts/Roboto-Medium.ttf') format('truetype');

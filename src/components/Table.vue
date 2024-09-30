@@ -37,4 +37,23 @@ const calculatedPrice = (sqm: number, price: number) => {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+thead {
+    tr {
+        background-color: #243640 !important;
+        th {
+            color: white !important;
+            font-size: 1.1em;
+        }
+    }
+
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(var(--v-theme-tertiary));
+}
+
+tr:nth-child(even) {
+    background-color: rgb(var(--v-theme-background));
+}
+</style>
